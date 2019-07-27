@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,25 +24,51 @@ namespace mainProgram
         public MainWindow()
         {
             InitializeComponent();
-            TreeViewItem item1 = new TreeViewItem() { Header = "节点一" };
-            TreeViewItem item11 = new TreeViewItem() { Header = "节点1-1" };
-            item11.Items.Add("aaaa");
-            item11.Items.Add("bbbb");
-            item11.Items.Add("cccc");
-            item11.Items.Add("dddd");
+            loadDirectoryInfo();
+        }
 
 
-            item1.Items.Add(item11);
-            item1.Items.Add("cccc");
-            item1.Items.Add("dddd");
+        //菜单栏保存点击
+        private void mnuSaveDoc_Click(object sender, RoutedEventArgs e)
+        {
 
-            TreeViewItem item2 = new TreeViewItem() { Header = "节点二" };
-            item2.Items.Add("aaaa");
-            item2.Items.Add("bbbb");
-            item2.Items.Add("cccc");
-            item2.Items.Add("dddd");
-            treeViewTotalProb.Items.Add(item1);
-            treeViewTotalProb.Items.Add(item2);
+        }
+        //菜单栏另存为点击
+        private void mnuSaveAsDoc_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //菜单栏编辑点击
+        private void mnuEditDoc_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //添加日期
+        private void btnAddDate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //添加问题
+        private void btnAddProm_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //选择中日期
+        private void datePickerProm_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            tbAddContent.Text = Convert.ToDateTime(datePickerProm.Text).ToString("yyyyMMdd");
+        }
+        //加载数据到treeView
+        private void loadDirectoryInfo()
+        {
+            DirectoryInfo directoryInfo=new DirectoryInfo(@"data");
+
+            foreach (var directory in directoryInfo.GetDirectories())
+            {
+                TreeViewItem item=new TreeViewItem() {Header = directory.Name};
+                treeViewTotalProb.Items.Add(item);
+            }
+            tbAddContent.Text = directoryInfo.GetDirectories().First().Name;
         }
     }
 }
